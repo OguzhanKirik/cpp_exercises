@@ -5,6 +5,8 @@
 #include <string>
 #include "chatgui.h"
 
+#include<memory>
+
 // forward declarations
 class ChatBot;
 class GraphEdge;
@@ -17,8 +19,10 @@ private:
     ////
 
     // data handles (owned)
-    std::vector<GraphNode *> _nodes;
-    std::vector<GraphEdge *> _edges;
+    //std::vector<GraphNode *> _nodes;
+    //std::vector<GraphEdge *> _edges;
+    std::shared_ptr<std::vector<GraphNode *>> _nodes = std::make_shared<std::vector<GraphNode *>>();
+    std::shared_ptr<std::vector<GraphEdge *>> _edges =  std::make_shared<std::vector<GraphEdge *>>();
 
     ////
     //// EOF STUDENT CODE
