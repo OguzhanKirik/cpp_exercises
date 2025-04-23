@@ -42,11 +42,73 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE
+////  CODE
 ////
+    //Copy Constructor; initiliaze -> ChatBot chatbot(ChatBot other);
+    ChatBot::ChatBot(const ChatBot& other){
+        //if(this != &other){
+            _image = new wxBitmap(*other._image);
+            this->_currentNode = other._currentNode;
+            this->_chatLogic = other._chatLogic;
+            this->_rootNode = other._rootNode;
+            std::cout << "ChatBot Copy Constructor" << std::endl;
+       // }
+    }
+
+    // Copy Assigment; initiliaze -> ChatBot chatbot = other;
+    ChatBot& ChatBot::operator=( const ChatBot& other){
+        if(this != &other){
+            this->_image = new wxBitmap(*other._image);
+            this->_currentNode = other._currentNode;
+            this->_chatLogic = other._chatLogic;
+            this->_rootNode = other._rootNode;
+            std::cout << "ChatBot Copy Assignment" << std::endl;
+        }
+        return *this;
+    }
+
+    //Move Constructor; initiliaze -> ChatBot chatbot(std::move(other)) ;
+    ChatBot::ChatBot(ChatBot&& other){
+        //if(&other != NULL){
+            this->_image = other._image;
+            //this->_currentNode = other._currentNode;
+            this->_chatLogic = other._chatLogic;
+            this->_rootNode = other._rootNode;
+
+            other._image = NULL;
+            //other._currentNode = nullptr;
+            other._rootNode = nullptr;
+            other._chatLogic = nullptr;
+            std::cout << "ChatBot Move Constructor" << std::endl;
+            //other.~ChatBot();
+        //}
+
+
+    }
+
+    //Move Assignment; initiliaze -> ChatBot chatbot = std::move(other);
+    ChatBot& ChatBot::operator=(ChatBot&& other){
+        if(this != &other){
+            this->_image = other._image;
+            //this->_currentNode = other._currentNode;
+            this->_chatLogic = other._chatLogic;
+            this->_rootNode = other._rootNode;
+            
+            other._image = NULL;
+            //other._currentNode = nullptr;
+            other._rootNode = nullptr;
+            other._chatLogic = nullptr;
+            std::cout << "ChatBot Move Assignment" << std::endl;
+        }
+
+        return *this;
+    }
+
+
+
 
 ////
-//// EOF STUDENT CODE
+//// EOF  CODE
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {
@@ -92,6 +154,8 @@ void ChatBot::SetCurrentNode(GraphNode *node)
     std::mt19937 generator(int(std::time(0)));
     std::uniform_int_distribution<int> dis(0, answers.size() - 1);
     std::string answer = answers.at(dis(generator));
+
+    _chatLogic->SetChatbotHandle(this); // update chatBot for chatLogic 
 
     // send selected node answer to user
     _chatLogic->SendMessageToUser(answer);

@@ -9,9 +9,8 @@ GraphNode::GraphNode(int id)
 GraphNode::~GraphNode()
 {
     //// STUDENT CODE
-    ////
-
-    delete _chatBot; 
+    // Is the chatbot being deleted twice?
+    //delete _chatBot; 
 
     ////
     //// EOF STUDENT CODE
@@ -32,21 +31,30 @@ void GraphNode::AddEdgeToChildNode(GraphEdge *edge)
     _childEdges.push_back(edge);
 }
 
-//// STUDENT CODE
+////  CODE
 ////
-void GraphNode::MoveChatbotHere(ChatBot *chatbot)
+// void GraphNode::MoveChatbotHere(ChatBot *chatbot)
+// {
+//     _chatBot = chatbot;
+//     _chatBot->SetCurrentNode(this);
+// }
+
+void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
-    _chatBot = chatbot;
-    _chatBot->SetCurrentNode(this);
+    _chatBot = std::move(chatbot);
+    _chatBot.SetCurrentNode(this);
+
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
-{
-    newNode->MoveChatbotHere(_chatBot);
-    _chatBot = nullptr; // invalidate pointer at source
+{       
+    std::cout << "ChatBot MoveChatbotHere" << std::endl;
+
+    newNode->MoveChatbotHere(std::move(_chatBot));
+    //_chatBot = nullptr; // invalidate pointer at source
 }
 ////
-//// EOF STUDENT CODE
+//// EOF  CODE
 
 GraphEdge *GraphNode::GetChildEdgeAtIndex(int index)
 {
