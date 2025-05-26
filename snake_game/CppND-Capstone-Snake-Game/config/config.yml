@@ -1,0 +1,9 @@
+
+username = Oguz
+gamespeed = 0.1
+
+obstacle = true
+food = Circle     // Square,Triangle,Circle
+addSecondPlayer = true  
+userNameSecond = Mel
+
