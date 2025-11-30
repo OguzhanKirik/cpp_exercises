@@ -7,8 +7,7 @@
 This project simulates **vehicle traffic movement across city streets and intersections**.  
 With increasing traffic density, intersections must be regulated for safety — therefore each intersection is equipped with a **traffic light**.
 
-The main objective of this project is to design a **thread-safe communication protocol between vehicles and intersections**, ensuring that traffic lights correctly control vehicle flow.  
-You will apply concurrency concepts such as **mutexes, locks, and message queues** to implement this behavior.
+The main objective of this project is to design a **thread-safe communication protocol between vehicles and intersections**, ensuring that traffic lights correctly control vehicle flow. Applied concurrency concepts are **mutexes, locks, and message queues** to implement this behavior.
 
 ---
 
